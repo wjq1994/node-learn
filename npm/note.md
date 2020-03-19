@@ -27,13 +27,18 @@ nrm test
 
 npm link 链接，在全局的npm包下做一个快捷键 
 
-提示全局命令执行时对应的脚本, 脚本必须增加`#! /usr/bin/env node`
+- 提示全局命令执行时对应的脚本, 脚本必须增加`#! /usr/bin/env node`
 ```json
 "bin": {
     "pack-wang": "./bin/www.js"
 }
 ```
 
+- 本地项目引用 在项目wang-ui-doc中引入项目wang-vue-ui 
+```
+切换到项目wang-vue-ui的根路径 执行 npm link
+切换到项目wang-ui-doc的根路径 执行 npm link wang-vue-ui
+```
 
 
 ## 本地包
@@ -75,7 +80,7 @@ alpha beta rc
 
 ## 发包
 - 先进入到要发包的文件夹中 
-- 配置忽略文件
+- 配置`.npmignore`配置文件
 - 查看对应版本和名字
 - 切换到官方中发布 `nrm use npm`
 - npm login
