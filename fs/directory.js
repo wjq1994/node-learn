@@ -27,6 +27,7 @@ function rmdirDeep(p,cb) {
 
             })
         } else {
+            console.log(11111);
             fs.unlink(p, cb);
         }
     })
@@ -60,6 +61,62 @@ function rmdirWide(p,cb) {
     })
 }
 
-rmdirWide('a', () => {
-    console.log("删除完成");
+// rmdirDeep('a', () => {
+//     console.log("删除完成");
+// })
+
+let arr = [];
+function getDirs(p, cb) {
+    fs.stat(p, (err, stats) => {
+        if (stats.isDirectory()) {
+            fs.readdir(p, (err, dirs) => {
+                dirs = dirs.map(dir => path.join(p,dir)); // a/b a/c
+                //index记录子文件个数
+                let index = 0;
+                function next() {
+                    //判断index = dirs.length时，说明子文件夹已经删除完
+                    //真正起删除作用的 fs.rmdir
+                    if (index === dirs.length) return cb();
+                    let current = dirs[index++];
+                    getDirs(current, next);
+                }
+
+                next();
+            })
+        } else {
+            arr.push(p);
+            cb();
+        }
+    })
+}
+
+function getDirsWidth(p, cb) {
+    fs.stat(p, (err, stats) => {
+        if (stats.isDirectory()) {
+            fs.readdir(p, (err, dirs) => {
+                dirs = dirs.map(dir => path.join(p,dir)); // a/b a/c
+                if (dirs.length === 0) {
+                    return cb();
+                };
+                let index = 0;
+                function done() {
+                    index++;
+                    if (dirs.length === index) {
+                        cb();
+                    }
+                };
+                dirs.forEach((dir, index) => {
+                    getDirsWidth(dir, done);
+                });
+            })
+        } else {
+            arr.push(p);
+            cb();
+        }
+    })
+}
+
+
+getDirsWidth("a", () => {
+    console.log(arr);
 })
