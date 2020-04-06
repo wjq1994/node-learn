@@ -3,13 +3,13 @@ const Koa = require('./koa');
 let app = new Koa();
 
 app.use((ctx)=>{
-    // console.log(ctx.req.path); // 原生的url
-    // // 自己封装的request上有原生的req属性
-    // console.log(ctx.request.req.path); 
-    // // pathname  => url.parse()
-    // console.log(ctx.request.path); // 自己封装的url属性
-    // // 简写
-    // console.log(ctx.path); // 他表示的是 ctx.request.url
+    console.log(ctx.req.path); // 原生的url
+    // 自己封装的request上有原生的req属性
+    console.log(ctx.request.req.path); 
+    // pathname  => url.parse()
+    console.log(ctx.request.path); // 自己封装的url属性
+    // 简写
+    console.log(ctx.path); // 他表示的是 ctx.request.url
     ctx.body = 'hello';
     ctx.body = 'world';
     // ctx.response.body = 'hello';
