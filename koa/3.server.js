@@ -13,8 +13,10 @@ let sleep = async () => {
 // 请求到来时会执行此方法
 app.use((ctx, next)=>{
     console.log(1);
+    ctx.body = "hello";
+    debugger;
     next();
-    throw new Error("我是错误");
+    //throw new Error("我是错误");
     console.log(2);
 });
 app.use(async (ctx, next)=>{
