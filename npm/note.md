@@ -89,3 +89,7 @@ alpha beta rc
 ## 发包后入口
 
 - package.json ---> main.js
+
+## 参考链接
+
+https://javascript.ruanyifeng.com/nodejs/npm.html#toc18
