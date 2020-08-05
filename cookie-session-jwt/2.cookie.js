@@ -50,8 +50,8 @@ let server = http.createServer((req, res) => {
         // res.end('write ok');
         res.setCookie('name', 'zf', {
             domain: '.zf.cn',
-            path: '/',
-            maxAge: 10,
+            path: '/read', // path设置，请求路径满足此条件时携带此cookie
+            expires: new Date(Date.now() + 3 * 60 * 60 * 24 * 1000),
         });
         res.setCookie('age', 10, {
             httpOnly: true,
