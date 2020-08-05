@@ -46,11 +46,11 @@ let server = http.createServer((req, res) => {
         return cookieObj[key];
     }
     if (req.url === '/write') {
-        // res.setHeader('Set-Cookie', ['name=zf; domain=.zf.cn; path=/; max-age=10', `age=10; httpOnly=true; expires=${new Date(Date.now() + 10*1000).toGMTString()}`])
+        // res.setHeader('Set-Cookie', ['name=zf; domain=localhost; path=/; max-age=10', `age=10; httpOnly=true; expires=${new Date(Date.now() + 10*1000).toGMTString()}`])
         // res.end('write ok');
         res.setCookie('name', 'zf', {
-            domain: '.zf.cn',
-            path: '/read', // path设置，请求路径满足此条件时携带此cookie
+            domain: 'localhost',
+            path: '/read', // 请求路径满足此条件时携带此cookie，(localhost/read, localhost/read/*)，localhost/*/read这种情况不会携带此cookies
             expires: new Date(Date.now() + 3 * 60 * 60 * 24 * 1000),
         });
         res.setCookie('age', 10, {
